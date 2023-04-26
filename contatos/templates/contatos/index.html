@@ -2,7 +2,7 @@
 
 {% block content%}
 <h1 class="mt-5">Minha agenda</h1>
-
+{{ name }}
         <table class="table">
           <thead>
             <tr>
@@ -13,40 +13,44 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>
-                <a href="#"> João</a>
-              </td>
-              <td>Miranda</td>
-              <td>35 9 5555-5555</td>
-              <td>Família</td>
-            </tr>
-            <tr>
-              <td>
-                <a href="#"> Leandro</a>
-              </td>
-              <td>Moreira</td>
-              <td>35 9 8888-5555</td>
-              <td>Família</td>
-            </tr>
-            <tr>
-              <td>
-                <a href="#"> Fátima</a>
-              </td>
-              <td>Oliveira</td>
-              <td>35 9 9999-4352</td>
-              <td>Conhecidos</td>
-            </tr>
+            
+
+            {% for contato in contatos %}
+              {% if contato.mostrar %}
+                <tr>
+                  <td>
+                    <a href="{% url 'ver_contato' contato.id  %}">{{ contato.name }}</a>
+                  </td>
+                  <td>{{ contato.last_name }}</td>
+                  <td>{{ contato.phone }}</td>
+                  <td>{{ contato.categoria }}</td>
+                </tr>
+              {% endif %}
+            {% endfor %}
           </tbody>
         </table>
-
+    <nav arial-label = "Page navigation example">
+      <ul class="pagination">
+        {% for pagina in contatos.paginator.page_range  %}
+          {% if contatos.number == pagina %}
+            <li class="page-item active">
+            <a class="page-link" href="?p={{ pagina }}">{{pagina}}</a>
+            </li>
+          {% else %}
+            <li class="page-item">
+            <a class="page-link" href="?p={{ pagina }}">{{pagina}}</a>
+          {% endif %}
+        {% endfor %}
+      </ul>
+        
+    </nav>
       </div>
     </div>
   </div>
 
   <!-- Bootstrap core JavaScript -->
-  <script src="{ % staticvendor/jquery/jquery.slim.min.js"%}></script>
-  <script src="{ % staticvendor/bootstrap/js/bootstrap.bundle.min.js%}%"></script>
+  <script src="{ % staticvendor/jquery/jquery.slim.min.js %}"></script>
+  <script src="{ % staticvendor/bootstrap/js/bootstrap.bundle.min.js %}"></script>
 
 </body>
 

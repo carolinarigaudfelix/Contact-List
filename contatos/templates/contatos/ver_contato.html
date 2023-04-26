@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+        <h1 class="mt-5">{{ contato.name }}</h1>
+        <dl>
+          <dt>ID</dt>
+          <dd>{{ contato.id }}</dd>
+
+          <dt>Telefone</dt>
+          <dd>{{ contato.phone }}</dd>
+
+          <dt>E-mail</dt>
+          <dd>{{ contato.email }}</dd>
+
+          <dt>Data criação</dt>
+          <dd>{{ contato.creation_date|date:'d/m/Y  H:i:s' }}</dd>
+
+          <dt>Categoria</dt>
+          <dd>{{ contato.categoria }}</dd>
+
+          <dt>Descrição</dt>
+          <dd>
+            {{ contato.description }}
+          </dd>
+        </dl>
+
+{% endblock %}
